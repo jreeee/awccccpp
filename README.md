@@ -24,6 +24,15 @@ this app **includes** two libraries:
 
 i might add a GraphQL lib, but for now that's it
 
+## build
+
+i plan to include executables when this is in a better shape...
+
+```
+$ mkdir build && cd build
+$ make 
+```
+
 ## next steps
 now that i have the first steps for the general structure, coming up are:
 
