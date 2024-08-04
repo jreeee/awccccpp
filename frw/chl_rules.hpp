@@ -1,3 +1,6 @@
+#ifndef CHL_RULES_HPP
+#define CHL_RULES_HPP
+
 struct chl_rules {
     bool timed = false;
     int timed_deadline = 0;
@@ -10,3 +13,5 @@ struct chl_rules {
     int minimum_total_runtime = 0;
     int maximum_total_runtime = 0;
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef REQUIREMENT_HPP
+#define REQUIREMENT_HPP
+
 #include <string>
 #include <vector>
 
@@ -13,3 +16,5 @@ class requirement {
     std::string req_to_string();
     
 };
+
+#endif

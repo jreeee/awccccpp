@@ -1,3 +1,7 @@
+#ifndef CHL_POST_HPP
+#define CHL_POST_HPP
+
+
 #include "requirement.hpp"
 #include <string>
 
@@ -18,3 +22,5 @@ class chl_post {
 
     // somehow deal with the added comments
 };
+
+#endif
