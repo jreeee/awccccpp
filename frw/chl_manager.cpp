@@ -15,12 +15,12 @@ std::vector<std::pair<int, int>> chl_manager::get_completed_challenge_posts() {
     // todo check that profile != ""
     std::string pattern1 = "href=\"https://anilist.co/forum/thread/";
     std::string pattern2 = "/comment/";
-    std::vector<int> matching_indices = str_util::find_matching_pattern(profile, pattern1);
+    std::vector<int> matching_indices = str_util::find_matching_pattern(profile, pattern1, false);
     // make sure its greater 0
     for(int i: matching_indices) {
-        int offset1 = i+pattern1.length();
+        int offset1 = i;
         int challenge = str_util::extract_digits_from_idx(profile, offset1);
-        int offset2 = offset1 + std::to_string(challenge).length() + pattern2.length();
+        int offset2 = offset1 + std::to_string(challenge).length();
         int comment = str_util::extract_digits_from_idx(profile, offset2);
         result.push_back(std::make_pair(challenge, comment));
     }

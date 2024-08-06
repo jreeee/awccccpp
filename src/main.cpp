@@ -42,14 +42,15 @@ int main(int argc, char *argv[]) {
         request.setOpt(ws);
         request.perform();
         std::string pattern = "https:\\/\\/anilist.co\\/forum\\/thread\\/";
-        std::vector<int> posts = str_util::find_matching_pattern(os.str(), pattern);
+        std::vector<int> posts = str_util::find_matching_pattern(os.str(), pattern, false);
 
         const std::string addr = "https://anilist.co/forum/thread/";
         for(auto i: posts) {
-            int thread_id = str_util::extract_digits_from_idx(os.str(), i+pattern.length());
-            std::cout << addr << thread_id << std::endl;
+            int thread_id = str_util::extract_digits_from_idx(os.str(), i);
+            std::pair<int, int> name = str_util::find_match_from_to_idx(os.str(), i, '[', ']', true);
+            std::cout << os.str().substr(name.first + 1, name.second-name.first-2) <<" - " << addr << thread_id << std::endl;
         }
-
+        //s.str().substr(name.first, name.second-name.first)
     }
     catch ( curlpp::LogicError & e ) {
         std::cout << e.what() << std::endl;
