@@ -1,6 +1,6 @@
 #include "chl_manager.hpp"
-#include "net_util.cpp"
-#include "str_util.cpp"
+#include "net_util.hpp"
+#include "str_util.hpp"
 #include <string>
 #include <utility>
 #include <vector>

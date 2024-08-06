@@ -1,7 +1,6 @@
-#include <vector>
-#include <string>
+#include "str_util.hpp"
 
-#include <iostream>
+#include <vector>
 
 namespace str_util {
     std::vector<int> find_matching_pattern(std::string const& input, std::string const& pattern) {
