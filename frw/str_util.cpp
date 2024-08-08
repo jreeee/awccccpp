@@ -2,6 +2,7 @@
 
 #include <utility>
 #include <vector>
+#include <algorithm>
 
 namespace str_util {
     // takes the string that should be searched and returns all indicies at which a match occurs
@@ -71,4 +72,8 @@ namespace str_util {
         }
         return std::make_pair(-1, -1);
     };
-}
+
+    void remove_char(std::string &str, char remove) {
+        str.erase(std::remove(str.begin(), str.end(), remove), str.end());
+    }
+} // end namespace str_util
