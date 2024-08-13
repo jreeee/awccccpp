@@ -1,4 +1,4 @@
-#include "net_util.hpp"
+#include "util_net.hpp"
 
 #include <string>
 #include <sstream>
@@ -7,7 +7,8 @@
 #include "../ext/curlpp/include/curlpp/Options.hpp"
 #include "../ext/curlpp/include/curlpp/Exception.hpp"
 
-namespace net_util {
+namespace util {
+namespace net {
 
     std::string get_awc_profile(std::string user) {
         
@@ -52,4 +53,5 @@ namespace net_util {
             std::exit(1);
         }
     };
-} // end namespace net_util
+} // end namespace net
+} // end namespace util

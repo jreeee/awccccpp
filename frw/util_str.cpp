@@ -1,10 +1,11 @@
-#include "str_util.hpp"
+#include "util_str.hpp"
 
 #include <utility>
 #include <vector>
 #include <algorithm>
 
-namespace str_util {
+namespace util {
+namespace str {
     // takes the string that should be searched and returns all indicies at which a match occurs
     // if "include_match" is TRUE the index starts at the first matching char
     // if "include_match" is FALSE the index starts at the first char AFTER the matching pattern
@@ -76,4 +77,5 @@ namespace str_util {
     void remove_char(std::string &str, char remove) {
         str.erase(std::remove(str.begin(), str.end(), remove), str.end());
     }
-} // end namespace str_util
+} //end of namespace str
+} // end namespace util

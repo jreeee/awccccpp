@@ -1,6 +1,6 @@
 #include "chl_manager.hpp"
-#include "net_util.hpp"
-#include "str_util.hpp"
+#include "util_net.hpp"
+#include "util_str.hpp"
 #include <string>
 #include <utility>
 #include <vector>
@@ -11,17 +11,17 @@ chl_manager::chl_manager(std::string user) : user_(user) {
 std::vector<std::pair<int, int>> chl_manager::get_completed_challenge_posts() {
     std::vector<std::pair<int, int>> result;
     // todo check if user != ""
-    std::string profile = net_util::get_awc_profile(user_);
+    std::string profile = util::net::get_awc_profile(user_);
     // todo check that profile != ""
     std::string pattern1 = "href=\"https://anilist.co/forum/thread/";
     std::string pattern2 = "/comment/";
-    std::vector<int> matching_indices = str_util::find_matching_pattern(profile, pattern1, false);
+    std::vector<int> matching_indices = util::str::find_matching_pattern(profile, pattern1, false);
     // make sure its greater 0
     for(int i: matching_indices) {
         int offset1 = i;
-        int challenge = str_util::extract_digits_from_idx(profile, offset1);
+        int challenge = util::str::extract_digits_from_idx(profile, offset1);
         int offset2 = offset1 + std::to_string(challenge).length();
-        int comment = str_util::extract_digits_from_idx(profile, offset2);
+        int comment = util::str::extract_digits_from_idx(profile, offset2);
         result.push_back(std::make_pair(challenge, comment));
     }
     return result;
