@@ -1,9 +1,14 @@
 cmake_minimum_required(VERSION 3.25)
 project(aw4cpp LANGUAGES CXX)
 
-set(FRAMEWORK_NAME frw)
+# disable curlpp warnings
+get_directory_property(compile_options COMPILE_OPTIONS)
+add_compile_options(-w)
 
 add_subdirectory(ext/curlpp)
+
+# reenable warnings
+set_directory_properties(PROPERTIES COMPILE_OPTIONS "${compile_options}")
 
 add_executable(aw4cpp)
 

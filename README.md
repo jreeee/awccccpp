@@ -1,6 +1,7 @@
 ###  Disclaimer: this project is neither affiliated with [AniList](https://anilist.co) nor [AWC](https://anilist.co/user/AWC/)
 
-###  Disclaimer 2: This is currently non-functional as i am working on building up the structure first
+###  Disclaimer 2: This is currently in a non-functional state as i am working on building up the structure first
+
 ## awccccpp / aw4cpp
 
 aw4cpp (AWC Challenge Checker C++) is a redesign of my older project [awccc](https://github.com/jreeee/awccc).
@@ -12,17 +13,25 @@ similar to awccc, aw4cpp aims to help you fill out AWC Challenges by adding date
 
 ## why rewrite and not fix the old app?
 
-awccc is written in Python and was more like a proof of concept than a proper application. with that the overall design of the app more or less hacked together. while it _generally_ works there are some big limitations e.g. being rather slow, checking only card-links, and a couple more.
+awccc is written in Python and was more like a proof of concept than a proper application, with that the overall design of the app more or less hacked together. while it _generally_ works there are some big limitations e.g. it being rather slow, checking only card-links, and a couple more.
 
 with aw4cpp i want to design my software _properly_ and have a fast and reliable tool for my challenging endeavours.
 
 ## dependencies
 
+to work properly, (lib)curl is needed
+
+(and a working internet connection _at least_ initially)
+
 this app **includes** two libraries:
 - [curlpp](http://www.curlpp.org/) which **requires libcurl**
 - [nlohmann's json](https://github.com/nlohmann/json)
 
-i might add a GraphQL lib, but for now that's it
+both can be found in ```ext/``` and are not submodules. 
+
+json because it can be used as header-only
+
+curlpp as i had to change the include in ```curlpp/include/curlpp/Form.hpp``` from ```<utilspp/clone_ptr.hpp>``` to ```"../utilspp/clone_ptr.hpp"``` for it to compile
 
 ## build
 
