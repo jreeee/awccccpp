@@ -5,12 +5,13 @@
 #include "../frw/util_str.hpp"
 #include "../frw/util_net.hpp"
 #include "../frw/util_type.hpp"
+#include "../frw/util_file.hpp"
 
 
 using json = nlohmann::json;
 
 int main(int argc, char *argv[]) {
-    int test = 4;
+    int test = 5;
 
     if (test == 1) {
         std::string user = "jreeee"; // idk what a "good" default value would be
@@ -56,4 +57,9 @@ int main(int argc, char *argv[]) {
         std::cout << tags.categories.size() << ", " << tags.tags.size() << std::endl;
     }
 
+    if (test == 5) {
+        auto home = util::file::get_home_dir();
+        std::cout << home << std::endl;
+        util::file::initial_setup(home);
+    }
 }

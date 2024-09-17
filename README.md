@@ -9,7 +9,7 @@ aw4cpp (AWC Challenge Checker C++) is a redesign of my older project [awccc](htt
 
 ## goal
 
-similar to awccc, aw4cpp aims to help you fill out AWC Challenges by adding dates and cheking if chosen entries fit their given requirement. additionally i want to implement a overview that displays the progress for all open challenges.
+similar to awccc, aw4cpp aims to help you fill out AWC Challenges by adding dates and checking if chosen entries fit their given requirement. additionally i want to implement a overview that displays the progress for all ongoing challenges.
 
 ## why rewrite and not fix the old app?
 
@@ -31,7 +31,7 @@ both can be found in ```ext/``` and are not submodules.
 
 json because it can be used as header-only
 
-curlpp as i had to change the include in ```curlpp/include/curlpp/Form.hpp``` from ```<utilspp/clone_ptr.hpp>``` to ```"../utilspp/clone_ptr.hpp"``` for it to compile
+curlpp as i had to change the include in ```curlpp/include/curlpp/Form.hpp``` from ```<utilspp/clone_ptr.hpp>``` to ```"../utilspp/clone_ptr.hpp"``` for it to compile and other stuff that breaks with new libcurl versions like ```CURLOPT_CLOSEPOLICY```
 
 ## build
 

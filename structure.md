@@ -2,8 +2,12 @@
 
 ### cached files
 initial mockup:
-```~/.cache/aw4cpp```
+
+```~/.config/aw4cpp```
+
 - user.json
+
+```~/.cache/aw4cpp```
 - al-cache
     - tags.json
     - anime.json
