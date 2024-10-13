@@ -1,4 +1,7 @@
+#include <ctime>
 #include <iostream>
+#include <ostream>
+#include <string>
 
 #include "../ext/nlohmann/json.hpp"
 #include "../frw/chl_manager.hpp"
@@ -11,7 +14,7 @@
 using json = nlohmann::json;
 
 int main(int argc, char *argv[]) {
-    int test = 6;
+    int test = 7;
 
     if (test == 1) {
         std::string user = "jreeee"; // idk what a "good" default value would be
@@ -66,7 +69,33 @@ int main(int argc, char *argv[]) {
     if (test == 6) {
         std::string thread = "{\"query\": \"query{Thread(id:76502) { body }}\"}";
         std::string response = util::net::post_request(thread,false);
-        auto a = util::str::find_match_from_to_idx(response, 0,  "~~~__", "__~~~", false);
-        std::cout << response.substr(a.first, a.second-a.first)<< std::endl;
+        auto challenge_name_idx = util::str::find_match_from_to_idx(response, 0,  "~~~__", "__~~~", false);
+        std::string title = response.substr(challenge_name_idx.first, challenge_name_idx.second-challenge_name_idx.first);
+    }
+
+    //challenge post stuff
+    if (test == 7) {
+        int thread_id = 77142;
+        int post_id = 2736880;
+        std::string post_url = "https://anilist.co/forum/thread/"+ std::to_string(thread_id) + "/comment/" + std::to_string(post_id);
+        std::string thread = "{\"query\": \"query{Thread(id: " + std::to_string(thread_id) + ") { body }}\"}";
+        std::string response1 = util::net::post_request(thread,false);
+        auto challenge_name_idx = util::str::find_match_from_to_idx(response1, 0,  "~~~__", "__~~~", false);
+        std::string title = response1.substr(challenge_name_idx.first, challenge_name_idx.second-challenge_name_idx.first);
+
+        std::string post = "{\"query\": \"query{ThreadComment(id: " + std::to_string(post_id) + ") { comment, createdAt }}\"}";
+        std::string response2 = util::net::post_request(post,false);
+        json json_post = nlohmann::json::parse(response2);
+        std::cout << title << std::endl;
+        std::cout << json_post["data"]["ThreadComment"][0]["comment"] <<std::endl;
+        time_t t = json_post["data"]["ThreadComment"][0]["createdAt"];
+        struct tm *tm = localtime(&t);
+        char date[12];
+        strftime(date, sizeof(date), "%Y-%m-%d", tm);
+        std::cout <<date <<std::endl;
+        // pattern search <hr> and append all occurence indices into a vector.
+        // susbstr1 = head -> start/end date, legend, special/custom stuff
+        // substr (i to i-1) = body -> reqs -> req, entry, start/finish date, [comments]
+        // substr n = footer -> optional, anything goes
     }
 }
