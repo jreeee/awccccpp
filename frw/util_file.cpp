@@ -68,7 +68,7 @@ void initial_setup(std::string const& home) {
     // files
     // set up a proper cfg to copy?
     nlohmann::json usr_cfg = {{"user", ""}};
-    std::ofstream os(cfg + "/aw4cpp/aw4pp.cfg");
+    std::ofstream os(cfg + "/aw4cpp/awc4pp.cfg");
     os << std::setw(4) << usr_cfg << std::endl;
 }
 

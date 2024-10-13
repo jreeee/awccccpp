@@ -1,5 +1,6 @@
 #include "util_str.hpp"
 
+#include <string>
 #include <utility>
 #include <vector>
 #include <algorithm>
@@ -44,30 +45,51 @@ namespace str {
     // iterates over a string starting at a specified index to match two chars in order, like '[', ']'
     // depending on if reverse is set it either iterates to the end of the string or to the beginning.
     // the pattern stays the same for both and does not have to be swapped to facilitate the process
-    std::pair<int, int> find_match_from_to_idx(std::string const& input, int idx, char begin, char end, bool reverse) {
+    std::pair<int, int> find_match_from_to_idx(std::string const& input, int idx, std::string const& begin, std::string const& end, bool reverse) {
         int begin_idx = -1;
         int end_idx = -1;
 
+
         if (!reverse) {
             for(int i=idx; i<input.length(); ++i) {
-                if(begin_idx < 0 && input.at(i) == begin) {
-                    begin_idx = i;
+                if(begin_idx < 0 && input.substr(i, begin.length()) == begin) {
+                    if (begin.length() == 1) {
+                        begin_idx = i;
+                    }
+                    else {
+                        begin_idx = i + begin.length();
+                    }
                     continue;
                 }
-                if(begin_idx >= 0 && input.at(i) == end) {
-                    end_idx = i+1;
-                    return std::make_pair(begin_idx, i);
+                if(begin_idx >= 0 && input.substr(i, end.length()) == end) {
+                    if (end.length() == 1) {
+                        end_idx = i+1;
+                    }
+                    else {
+                        end_idx = i;
+                    }
+                    return std::make_pair(begin_idx, end_idx);
                 }
             }
         }
         else {
-            for(int i=idx; i>0; --i) {
-                if(end_idx < 0 && input.at(i) == end) {
-                    end_idx = i+1;
+            for(int i=idx; i>begin.length(); --i) {
+                if(end_idx < 0 && input.substr(i, end.length()) == end) {
+                    if (end.length() == 1) {
+                        end_idx = i+1;
+                    }
+                    else {
+                        end_idx = i;
+                    }
                     continue;
                 }
-                if(end_idx >= 0 && input.at(i) == begin) {
-                    return std::make_pair(i, end_idx);
+                if(end_idx >= 0 && input.substr(i, begin.length()) == begin) {
+                    if (begin.length() == 1) {
+                        return std::make_pair(i, end_idx);
+                    }
+                    else {
+                        return std::make_pair(i + begin.length(), end_idx);
+                    }
                 }
             }
         }

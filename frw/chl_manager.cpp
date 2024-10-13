@@ -1,6 +1,7 @@
 #include "chl_manager.hpp"
 #include "util_net.hpp"
 #include "util_str.hpp"
+#include <algorithm>
 #include <string>
 #include <utility>
 #include <vector>
@@ -20,9 +21,13 @@ std::vector<std::pair<int, int>> chl_manager::get_completed_challenge_posts() {
     for(int i: matching_indices) {
         int offset1 = i;
         int challenge = util::str::extract_digits_from_idx(profile, offset1);
-        int offset2 = offset1 + std::to_string(challenge).length();
+        int offset2 = offset1 + std::to_string(challenge).length() + pattern2.length();
         int comment = util::str::extract_digits_from_idx(profile, offset2);
         result.push_back(std::make_pair(challenge, comment));
     }
+    // to remove duplicate entries, techincally does not require the sort()
+    // depening on how the genre challenges are done, this might need to go
+    std::sort(result.begin(), result.end());
+    result.erase(std::unique(result.begin(), result.end()), result.end());
     return result;
 };

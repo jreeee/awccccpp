@@ -11,7 +11,7 @@
 using json = nlohmann::json;
 
 int main(int argc, char *argv[]) {
-    int test = 5;
+    int test = 6;
 
     if (test == 1) {
         std::string user = "jreeee"; // idk what a "good" default value would be
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
         const std::string addr = "https://anilist.co/forum/thread/";
         for(auto i: posts) {
             int thread_id = util::str::extract_digits_from_idx(response, i);
-            std::pair<int, int> name = util::str::find_match_from_to_idx(response, i, '[', ']', true);
+            std::pair<int, int> name = util::str::find_match_from_to_idx(response, i, "[", "]", false);
             std::cout << response.substr(name.first + 1, name.second-name.first-2) <<" - " << addr << thread_id << std::endl;
         }
     }
@@ -61,5 +61,12 @@ int main(int argc, char *argv[]) {
         auto home = util::file::get_home_dir();
         std::cout << home << std::endl;
         util::file::initial_setup(home);
+    }
+
+    if (test == 6) {
+        std::string thread = "{\"query\": \"query{Thread(id:76502) { body }}\"}";
+        std::string response = util::net::post_request(thread,false);
+        auto a = util::str::find_match_from_to_idx(response, 0,  "~~~__", "__~~~", false);
+        std::cout << response.substr(a.first, a.second-a.first)<< std::endl;
     }
 }
